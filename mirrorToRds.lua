@@ -1,6 +1,8 @@
 local redis = require "resty.redis"
 ngxmatch=ngx.re.find
 local url = ngx.var.request_uri
+local server_name  = ngx.var.server_name
+local version = 1
 
 function redis_conn()
 	local cache = redis.new()
@@ -32,7 +34,7 @@ function savePostToRds()
 		return 
 	end
 	---ngx.log(ngx.ERR,post_body)
-	msg = "{'url':'"..url.."','data':'"..post_body.."'}"
+	msg = "{'@version':'"..version.."','host':'"..server_name."','url':'"..url.."','data':'"..post_body.."'}"
 	--ngx.log(ngx.ERR,msg)
 	cache:publish("elk_body",msg)
 end
