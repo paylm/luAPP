@@ -34,7 +34,7 @@ function savePostToRds()
 		return 
 	end
 	---ngx.log(ngx.ERR,post_body)
-	msg = "{'@version':'"..version.."','host':'"..server_name."','url':'"..url.."','data':'"..post_body.."'}"
+	msg = "{'@version':'"..version.."','host':'"..server_name.."','url':'"..url.."','message':'"..post_body.."'}"
 	--ngx.log(ngx.ERR,msg)
 	cache:publish("elk_body",msg)
 end
@@ -67,3 +67,4 @@ end
 ---		content_by_lua_file conf/lua/mirror_redis.lua;
 ---	}
 ---}
+--- elk --- 可导入到elk 分析处理
