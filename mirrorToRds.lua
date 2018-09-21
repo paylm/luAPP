@@ -70,3 +70,20 @@ end
 ---	}
 ---}
 --- elk --- 可导入到elk 分析处理
+---
+---input { 
+ ---  redis {
+ ---               data_type => "channel"
+ ---               host => "127.0.0.1"
+ ---              db => "5"
+ ---               port => "6380"
+ ---               password => "kingdee"
+ ---              key => "elk_body"
+ ---       }
+---}
+
+---output {
+---  elasticsearch { hosts => ["127.0.0.1:9200"] }
+---  stdout { codec => rubydebug }
+---}
+
