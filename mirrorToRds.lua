@@ -24,8 +24,6 @@ function redis_conn()
 	return cache
 end
 
-local cache = redis_conn()
-
 function savePostToRds()
 	ngx.req.read_body()
 	local post_body = ngx.req.get_body_data()
@@ -39,8 +37,12 @@ function savePostToRds()
 	cache:publish("elk_body",msg)
 end
 
-savePostToRds()
 
+local cache = redis_conn()
+if not cache then
+	return true
+end
+savePostToRds()	
 
 local ok, err = cache:set_keepalive(10000, 100)
 if not ok then
