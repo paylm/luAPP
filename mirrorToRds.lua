@@ -38,7 +38,7 @@ function savePostToRds()
 end
 
 
-local cache = redis_conn()
+cache = redis_conn()
 if not cache then
 	return true
 end
