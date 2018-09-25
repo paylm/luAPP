@@ -32,7 +32,7 @@ function savePostToRds()
 		return 
 	end
 	---ngx.log(ngx.ERR,post_body)
-	msg = "{'@version':'"..version.."','host':'"..server_name.."','url':'"..url.."','message':'"..post_body.."'}"
+	msg = "{\"host\":\""..server_name.."\",\"url\":\""..url.."\",\"message\":\""..post_body.."\"}"
 	--ngx.log(ngx.ERR,msg)
 	cache:publish("elk_body",msg)
 end
