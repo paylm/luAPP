@@ -3,6 +3,7 @@ ngxmatch=ngx.re.find
 local url = ngx.var.request_uri
 local server_name  = ngx.var.server_name
 local version = 1
+local clientip = ngx.var.remote_addr
 
 function redis_conn()
 	local cache = redis.new()
@@ -32,7 +33,7 @@ function savePostToRds()
 		return 
 	end
 	---ngx.log(ngx.ERR,post_body)
-	msg = "{\"host\":\""..server_name.."\",\"url\":\""..url.."\",\"message\":\""..post_body.."\"}"
+	msg = "{\"host\":\""..server_name.."\",\"clientip\":\""..clientip.."\",\"url\":\""..url.."\",\"message\":\""..post_body.."\"}"
 	--ngx.log(ngx.ERR,msg)
 	cache:publish("elk_body",msg)
 end
